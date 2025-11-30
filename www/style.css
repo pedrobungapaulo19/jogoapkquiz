@@ -1,0 +1,415 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@300;400;500;700&display=swap');
+
+:root {
+    --primary-color: #00bcd4; /* Ciano Moderno */
+    --secondary-color: #ff9800; /* Laranja Vívido (Destaque) */
+    --background-color: #1a1a1a; /* Fundo Ultra Escuro */
+    --card-background: #2c2c2c;
+    --text-color: #e0e0e0; 
+    --text-light: #bdbdbd;
+    --correct-color: #4CAF50; 
+    --wrong-color: #F44336; 
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------------------------------- */
+/* NOVO: AJUSTE PARA IMAGENS DOS ÍCONES (.icon) */
+/* ---------------------------------- */
+.icon {
+    height: 24px; /* Tamanho padrão de ícone */
+    width: 24px;
+    object-fit: contain; /* Garante que a imagem cabe sem cortar */
+    /* Se os seus ícones forem escuros, você pode usar: 
+       filter: invert(1);
+       para torná-los brancos. */
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Essencial para evitar scroll no body */
+    height: 100vh; 
+    min-height: 100vh;
+    padding: 20px;
+    background-image: linear-gradient(135deg, #101010 0%, #222 100%);
+    overflow: hidden; 
+}
+
+.container {
+    background: var(--card-background);
+    border-radius: 20px;
+    /* 🔑 RESTAURADO: Sombra original do container */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 50px rgba(0, 188, 212, 0.15);
+    padding: 30px 40px;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    position: relative;
+    /* 🔑 RESTAURADO: Borda original do container */
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    max-height: calc(100vh - 40px); 
+    overflow-y: auto; 
+}
+
+/* Redução do tamanho das fontes principais */
+h1 {
+    font-size: 2.5rem; /* Mantido em 2.5rem */
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+    font-weight: 700;
+}
+
+/* Redução do tamanho do subtítulo */
+h2 {
+    font-size: 1.8rem; /* Mantido em 1.8rem */
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+/* ---------------------------------- */
+/* Telas do Jogo */
+/* ---------------------------------- */
+.screen {
+    display: none;
+    /* 🔑 RESTAURADO: Animação fadeIn original */
+    animation: fadeIn 0.8s ease-in-out;
+    max-height: calc(100vh - 100px); 
+    overflow-y: auto;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------------------------- */
+/* Botões Comuns (Ajuste para garantir alinhamento vertical do texto e da imagem) */
+/* ---------------------------------- */
+.main-btn, .option-btn, .control-btn {
+    /* 🔑 RESTAURADO: Background original dos botões */
+    background: linear-gradient(45deg, var(--secondary-color), #ffc107);
+    color: #1a1a1a; 
+    border: none;
+    padding: 12px 25px; /* Mantido ajustado */
+    margin: 8px 4px; /* Mantido ajustado */
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem; /* Mantido ajustado */
+    font-weight: 700;
+    transition: all 0.3s ease;
+    /* 🔑 RESTAURADO: Sombra original dos botões */
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+    /* 🔑 ESSENCIAL PARA O ALINHAMENTO DA IMAGEM E TEXTO: */
+    display: inline-flex;
+    align-items: center; /* Alinha a imagem e o texto verticalmente */
+    justify-content: center;
+    gap: 10px;
+}
+
+/* 🔑 RESTAURADO: Hover e Transform original dos botões */
+.main-btn:hover, .option-btn:hover, .control-btn:hover {
+    background: linear-gradient(45deg, #ffc107, var(--secondary-color));
+    transform: translateY(-5px); /* Restaurado para -5px */
+    box-shadow: 0 10px 20px rgba(255, 152, 0, 0.5);
+}
+
+.main-btn:disabled {
+    background: #555;
+    color: #bbb;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ---------------------------------- */
+/* Tela de Seleção de Matéria */
+/* ---------------------------------- */
+.materia-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+    gap: 15px; 
+    margin-bottom: 20px; 
+}
+
+.materia-btn {
+    /* 🔑 RESTAURADO: Background, cor e borda original dos botões de matéria */
+    background: var(--card-background);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 15px 10px; 
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.2);
+    font-size: 0.9rem; 
+}
+
+.materia-btn:hover {
+    /* 🔑 RESTAURADO: Hover e Transform original dos botões de matéria */
+    background: var(--primary-color);
+    color: var(--card-background);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 188, 212, 0.5);
+}
+
+.control-group {
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 15px;
+}
+
+.music-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.volume-slider {
+    width: 120px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: #555;
+    border-radius: 4px;
+    outline: none;
+    transition: background 0.2s;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+/* ---------------------------------- */
+/* Tela do Quiz */
+/* ---------------------------------- */
+.quiz-area {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#current-materia {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+    color: var(--secondary-color);
+    font-size: 1.5rem; 
+}
+
+.question-number {
+    font-size: 1rem;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* Redução do tamanho da pergunta */
+#question-text {
+    font-size: 1.4rem; 
+    font-weight: 400;
+    margin-bottom: 20px; 
+    line-height: 1.5;
+    color: var(--text-color);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    max-height: 18vh; 
+    overflow-y: auto; 
+}
+
+.options-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px; 
+    margin-bottom: 20px; 
+}
+
+.option-btn {
+    width: 100%;
+    /* 🔑 RESTAURADO: Background, cor e borda original das opções */
+    background: #3a3a3a;
+    color: var(--text-color);
+    padding: 10px 15px; 
+    border: 1px solid #555;
+    font-size: 0.9rem; 
+    font-weight: 400;
+    box-shadow: none;
+}
+
+.option-btn:hover {
+    /* 🔑 RESTAURADO: Hover das opções */
+    background: #4a4a4a;
+    transform: translateY(-2px);
+}
+
+.option-btn.selected {
+    border: 2px solid var(--secondary-color);
+    box-shadow: 0 0 10px var(--secondary-color);
+    background: #4a4a4a;
+}
+
+.option-btn.correct {
+    background-color: var(--correct-color);
+    color: white;
+    box-shadow: 0 0 15px var(--correct-color);
+    border: 2px solid var(--correct-color);
+}
+
+.option-btn.wrong {
+    background-color: var(--wrong-color);
+    color: white;
+    box-shadow: 0 0 15px var(--wrong-color);
+    border: 2px solid var(--wrong-color);
+}
+
+/* Container para os botões do Quiz (Próxima + Voltar) */
+.quiz-controls-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 5px;
+}
+
+.secondary-action-btn {
+    /* 🔑 RESTAURADO: Background e cor original do botão secundário */
+    background: #555 !important;
+    color: var(--text-color) !important;
+    box-shadow: none !important;
+    border: 1px solid var(--text-light);
+    font-size: 0.9rem; 
+}
+
+.secondary-action-btn:hover {
+    background: #666 !important;
+    transform: translateY(-2px);
+}
+
+/* ---------------------------------- */
+/* Tela de Perfil do Admin (Ajuste de fonte) */
+/* ---------------------------------- */
+#admin-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--primary-color);
+    box-shadow: 0 0 20px rgba(0, 188, 212, 0.5);
+    margin-bottom: 10px;
+}
+
+.profile-info p {
+    font-size: 1rem; 
+    margin: 8px 0;
+    color: var(--text-light);
+}
+
+.profile-info strong {
+    color: var(--secondary-color);
+}
+
+.profile-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+    overflow-wrap: break-word; 
+    word-wrap: break-word;     
+    word-break: break-word;   
+}
+
+.profile-info a:hover {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+/* ---------------------------------- */
+/* Responsividade */
+/* ---------------------------------- */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    h1 {
+        font-size: 2.2rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+    .options-container {
+        grid-template-columns: 1fr;
+    }
+    .materia-options {
+        grid-template-columns: 1fr 1fr;
+    }
+    #question-text {
+        font-size: 1.2rem;
+        max-height: 14vh;
+    }
+    .main-btn, .materia-btn, .option-btn, .control-btn, .secondary-action-btn {
+        font-size: 0.85rem; 
+        padding: 10px 15px;
+    }
+    .quiz-controls-bottom {
+        flex-direction: column;
+        gap: 8px;
+    }
+    #next-question-btn, #back-to-materia-from-quiz-btn {
+        width: 100%;
+    }
+    /* AJUSTE RESPONSIVO PARA OS ÍCONES */
+    .icon {
+        height: 20px;
+        width: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    h2 {
+        font-size: 1.4rem;
+    }
+    .materia-options {
+        grid-template-columns: 1fr;
+    }
+    .control-group {
+        flex-direction: column;
+    }
+}

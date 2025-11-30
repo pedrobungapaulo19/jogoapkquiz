@@ -1,0 +1,31 @@
+{
+  // 🔑 Configuração Básica e Identificação
+  "name": "Estudo BungaTech Jogo",
+  "short_name": "BungaTechJogo",
+  "description": "Jogo para testar o Q.I. com perguntas de informática, Química, física, Biologia, para te ajudar a testar o seu coeficiente emocional",
+  
+  // Caminho correto (relativo)
+  "start_url": "index.html", 
+  
+  "display": "standalone", 
+  "background_color": "#1a1a1a", 
+  "theme_color": "#00bcd4", 
+
+  // 🔑 Ícones do Aplicativo (CORRIGIDO PARA TAMANHOS PADRÃO)
+  "icons": [
+    {
+      // Nome sugerido para a imagem de 192x192 pixels
+      "src": "logo-192.png", 
+      // 🛑 CORREÇÃO: O tamanho deve ser quadrado e padrão
+      "sizes": "192x192", 
+      "type": "image/png"
+    },
+    {
+      // Nome sugerido para a imagem de 512x512 pixels
+      "src": "logo-512.png",
+      // 🛑 CORREÇÃO: O tamanho deve ser quadrado e padrão
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

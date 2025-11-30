@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo BungaTech Jogo Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    </head>
+<body>
+
+    <div class="container">
+        <h1>Estudo BungaTech Jogo</h1>
+
+        <div id="welcome-screen" class="screen active">
+            <h2>Bem-vindo(a) ao Desafio! teste o seu (Q.I) podes ligar o som nas configurações</h2>
+            <button class="main-btn" onclick="showScreen('materia-select-screen')">
+                <img src="play.png" alt="Play" class="icon"> Começar o Jogo
+            </button>
+            <button class="main-btn secondary-action-btn" onclick="showScreen('settings-screen')">
+                <img src="setting.png" alt="Settings" class="icon"> Configurações
+            </button>
+            <button class="main-btn secondary-action-btn" onclick="showScreen('admin-profile-screen')">
+                <img src="admin.png" alt="Person" class="icon"> Perfil do Admin
+            </button>
+        </div>
+
+        <div id="materia-select-screen" class="screen">
+            <h2>Selecione a Matéria Para Jogar</h2>
+            <div class="materia-options">
+                </div>
+            <div class="control-group">
+                <audio id="background-music" loop></audio>
+                <button class="control-btn secondary-action-btn" onclick="showScreen('welcome-screen')">
+                    <img src="voltar.png" alt="Back" class="icon"> Voltar
+                </button>
+            </div>
+        </div>
+        
+        <div id="quiz-screen" class="screen">
+            <h3 id="current-materia"></h3>
+            <div class="quiz-area">
+                <p class="question-number">Pergunta <span id="question-index">1</span> de <span id="total-questions">5</span></p>
+                <p id="question-text">O texto da pergunta aparecerá aqui.</p>
+                
+                <div id="options-container" class="options-container">
+                    </div>
+            </div>
+
+            <div class="quiz-controls-bottom">
+                <button id="back-to-materia-from-quiz-btn" class="main-btn secondary-action-btn" onclick="showScreen('materia-select-screen')">
+                    <img src="dashboard.png" alt="Dashboard" class="icon"> Matérias
+                </button>
+                <button id="next-question-btn" class="main-btn" disabled onclick="nextQuestion()">
+                    Próxima <img src="avancar.png" alt="Next" class="icon">
+                </button>
+            </div>
+        </div>
+
+        <div id="result-screen" class="screen">
+            <h2>Resultado Final</h2>
+            <p>Você acertou <strong id="score-display">0</strong> perguntas de <span id="total-questions-result">5</span>.</p>
+            <p>Seu recorde atual salvo é de: <strong id="saved-score-on-result">0</strong>.</p>
+            <button class="main-btn" onclick="showScreen('materia-select-screen')">
+                <img src="repetir.png" alt="Repeat" class="icon"> Tentar Novamente
+            </button>
+        </div>
+
+        <div id="admin-profile-screen" class="screen">
+            <h2>Perfil do Administrador</h2>
+            <div id="admin-profile">
+                <img src="admin-foto.jpg" alt="Foto do Admin" class="profile-picture">
+                <div class="profile-info">
+                    <p><strong>Nome:</strong> Pedro Bunga Paulo</p>
+                    <p><strong></strong> Desenvolvedor web, criador de IA, apaixonado em tecnologia.</p>
+                    <p><strong>Contato:</strong> <a href="mailto: pedrobungapaulo2023@gmail.com">pedrobungapaulo2023@gmail.com</a></p>
+                    <p><strong>Portfólio:</strong> <a href="https://pedrobungapaulo.onrender.com" target="_blank">https://pedrobungapaulo.onrender.com</a></p>
+                </div>
+            </div>
+            <button class="main-btn secondary-action-btn" onclick="showScreen('welcome-screen')">
+                <img src="voltar.png" alt="Back" class="icon"> Voltar
+            </button>
+        </div>
+
+        <div id="settings-screen" class="screen">
+            <h2>Configurações do Jogo</h2>
+            
+            <div class="music-controls">
+                <h3>Música e Áudio</h3>
+                <button id="music-toggle-btn" class="control-btn" onclick="toggleMusic()">
+                    <img id="music-icon" src="son.png" alt="Música" class="icon"> <span id="music-text">Música: Ligado</span>
+                </button>
+
+                <p>Volume:</p>
+                <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.1" value="0.5" oninput="updateVolume(this.value)">
+                <span id="volume-value-display">50%</span>
+            </div>
+
+            <hr style="margin: 30px 0; border-color: rgba(255, 255, 255, 0.1);">
+
+            <div class="score-controls">
+                <h3>Pontuação e Progresso</h3>
+                <p>Seu Recorde Pessoal Salvo: <strong id="saved-score-display">0 Pontos</strong></p>
+                <p class="text-light" style="font-size: 0.9rem; margin-top: 10px;">
+                    Essa pontuação é salva automaticamente.
+                </p>
+                <button class="main-btn secondary-action-btn" style="background: var(--wrong-color) !important;" onclick="resetScoreConfirmation()">
+                    <img src="lixo.png" alt="Delete" class="icon"> Zerar Recorde
+                </button>
+            </div>
+
+            <div class="control-group">
+                <button class="control-btn secondary-action-btn" onclick="showScreen('welcome-screen')">
+                    <img src="voltar.png" alt="Back" class="icon"> Voltar
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

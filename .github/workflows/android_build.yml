@@ -1,0 +1,52 @@
+name: Cordova Android Build (APK)
+
+on:
+  push:
+    branches:
+      - main  # 1. ATENÇÃO: Verifique se este é o nome do seu branch principal (pode ser 'master')
+  workflow_dispatch: # Permite rodar o workflow manualmente
+
+jobs:
+  build_android:
+    runs-on: ubuntu-latest # Usa um servidor Linux virtual no GitHub para a compilação
+
+    steps:
+      - name: 1. Checkout do Código (Baixa o seu projeto)
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar Node.js (Ambiente de desenvolvimento)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: 3. Instalar Cordova CLI Globalmente
+        run: npm install -g cordova
+# ... (Mantenha os passos 1, 2 e 3 como estão) ...
+
+      - name: 4. Adicionar a Plataforma Android ao Projeto (Robusto)
+        # Usa '--no-fetch' para evitar problemas de download em ambientes de CI/CD
+        run: sudo cordova platform add android --no-fetch
+
+      - name: 5. Construir o Aplicativo Android (Gerar APK de Debug - Robusto)
+        # Adiciona a opção '--stacktrace' para log mais detalhado
+        run: sudo cordova build android --debug --stacktrace
+        
+# ... (Mantenha os passos 6 e 7 como estão) ...
+          cordova build android --debug
+        
+        # O resultado do build de debug (teste) é o APK.
+        # O APK estará em: platforms/android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: 6. Encontrar e Nomear o Arquivo APK
+        # Localiza o APK recém-criado para podermos fazer o upload
+        id: find_apk
+        run: |
+          APK_PATH=$(find platforms/android -name "*.apk" | grep debug | head -n 1)
+          echo "APK_FILE_PATH=$APK_PATH" >> $GITHUB_OUTPUT
+
+      - name: 7. Fazer Upload do APK como Artefato (Para você baixar)
+        # O GitHub empacota o APK em um ZIP para que você possa baixar
+        uses: actions/upload-artifact@v4
+        with:
+          name: JogoBungaTechQuiz-APK-Debug
+          path: ${{ steps.find_apk.outputs.APK_FILE_PATH }}

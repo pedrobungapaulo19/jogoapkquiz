@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.bungatech.financas" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Bunga Finanças</name>
+    <description>
+       Jogo Quiz BungaTech sobre materia de Programação, Física, Química, informática e biologia.
+    </description>
+    <author email="pedrobungapaulo2023@gmail.com" href="https://pedrobungapaulo.onrender.com">
+        Pedro Bunga Paulo
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    
+    <platform name="android">
+        <preference name="android-minSdkVersion" value="22" />
+        <preference name="android-targetSdkVersion" value="34" />
+        <allow-intent href="market:*" />
+    </platform>
+    <icon src="icon.png" />
+    
+    <platform name="android">
+        <icon src="icon.png" density="xhdpi" />
+        
+        <icon src="res/icon/android/icon-36-ldpi.png" density="ldpi" />
+        <icon src="res/icon/android/icon-48-mdpi.png" density="mdpi" />
+        <icon src="res/icon/android/icon-72-hdpi.png" density="hdpi" />
+        <icon src="res/icon/android/icon-96-xhdpi.png" density="xhdpi" />
+        <icon src="res/icon/android/icon-144-xxhdpi.png" density="xxhdpi" />
+        <icon src="res/icon/android/icon-192-xxxhdpi.png" density="xxxhdpi" />
+    </platform>
+
+    <platform name="ios">
+        <icon src="res/icon/ios/icon-60.png" width="60" height="60" />
+        <icon src="res/icon/ios/icon-60@2x.png" width="120" height="120" />
+        <icon src="res/icon/ios/icon-60@3x.png" width="180" height="180" />
+        <icon src="res/icon/ios/icon-1024.png" width="1024" height="1024" />
+        </platform>
+</widget>
