@@ -22,20 +22,35 @@ jobs:
       - name: 3. Instalar Cordova CLI
         run: npm install -g cordova
 
+      # Nota: Se o seu projeto Cordova tiver pacotes npm/dependências, adicione um passo "npm install" aqui.
+
       - name: 4. Adicionar Plataforma Android
+        # Usamos --no-fetch para evitar baixar o Cordova Android Package do npm, pois ele geralmente já está no cache.
         run: cordova platform add android --no-fetch
 
       - name: 5. Gerar APK Debug
         run: cordova build android --debug --stacktrace
 
-      - name: 6. Encontrar o APK
+      - name: 6. Encontrar o APK e Definir Variável de Saída
         id: find_apk
+        # A sintaxe de comando shell foi corrigida para garantir que o caminho do APK seja capturado.
         run: |
-        APK_PATH=(find platforms/android -name "*debug.apk" | head -n 1)
-          echo "APK_FILE_PATH=APK_PATH" >> GITHUB_OUTPUT
+          # Encontra o primeiro arquivo .apk de debug na estrutura de pastas da plataforma Android
+          APK_PATH=$(find platforms/android -name "*debug.apk" | head -n 1)
+          
+          # Verifica se um caminho foi encontrado
+          if [ -z "$APK_PATH" ]; then
+            echo "::error::Não foi possível encontrar o arquivo APK de debug."
+            exit 1
+          fi
 
-      - name: 7. Upload do APK
+          # Define a variável de saída para o passo 7
+          echo "APK_FILE_PATH=$APK_PATH" >> $GITHUB_OUTPUT
+
+      - name: 7. Upload do APK como Artifact
         uses: actions/upload-artifact@v4
         with:
           name: JogoBungaTechQuiz-APK-Debug
-          path:{{ steps.find_apk.outputs.APK_FILE_PATH }}
+          # Referencia o valor de saída do passo 6
+          path: ${{ steps.find_apk.outputs.APK_FILE_PATH }}
+          retention-days: 7
